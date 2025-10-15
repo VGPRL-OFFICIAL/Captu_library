@@ -1,0 +1,79 @@
+[
+  {
+    "sinopse": "Musashi Miyamoto segue seu caminho para se tornar o maior samurai. Sua jornada o leva a um confronto com o formidável Mestre Seijuro Yoshioka.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2FScreenshot_20250828_204958_Samsung%20Notes.jpg?alt=media&token=f6926d3d-9cfa-4b99-ba42-dabc9a89d5cc",
+    "genero": "Samurais, Ação, Histórico, Drama, Seinen",
+    "link_acesso": "https://drive.google.com/file/d/1bTDMJUjClnym_f4z4SpHAXke92Nl9hzS/view?usp=drivesdk",
+    "titulo": "VAGABOND vol.2",
+    "classificacao": "18",
+    "comentarios": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2Fcomentarios_livros%2Fcomentario_num_8647534658797587?alt=media&token=f275bcb8-a55c-4d79-9dc5-6a4225fe5470",
+    "autor": "Takehiko Inoue",
+    "likes": "120"
+  },
+  {
+    "sinopse": "A busca de Musashi pelo caminho da espada o coloca contra novos desafios e inimigos inesperados, forçando-o a questionar suas habilidades.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2FScreenshot_20250829_060542_Drive.jpg?alt=media&token=e2d64772-f329-4145-84d3-06ac7d4c34a8",
+    "genero": "Samurais, Ação, Histórico",
+    "link_acesso": "link_acesso_vol3",
+    "titulo": "VAGABOND vol.3",
+    "classificacao": "18",
+    "comentarios": "link_comentarios_vol3",
+    "autor": "Takehiko Inoue",
+    "likes": "95"
+  },
+  {
+    "sinopse": "Musashi enfrenta o desafio de dominar a si mesmo antes de enfrentar outros. O treinamento solitário molda o futuro espadachim.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2Fvagabond_vol4.jpg?alt=media",
+    "genero": "Samurais, Ação, Histórico",
+    "link_acesso": "link_acesso_vol4",
+    "titulo": "VAGABOND vol.4",
+    "classificacao": "18",
+    "comentarios": "link_comentarios_vol4",
+    "autor": "Takehiko Inoue",
+    "likes": "150"
+  },
+  {
+    "sinopse": "Um conto pungente sobre dois irmãos, Seita e Setsuko, lutando para sobreviver ao caos dos bombardeios no Japão durante a Segunda Guerra Mundial.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2Fotumulo_dos_vagalumes.jpg?alt=media",
+    "genero": "Drama, Guerra, Histórico",
+    "link_acesso": "link_acesso_vagalumes",
+    "titulo": "O Túmulo dos Vagalumes",
+    "classificacao": "12",
+    "comentarios": "link_comentarios_vagalumes",
+    "autor": "Akiyuki Nosaka",
+    "likes": "0"
+  },
+  {
+    "sinopse": "Renascendo com um novo nome, Miyamoto Musashi, ele tem a chance de deixar seu passado violento para trás e buscar um caminho mais nobre, o do samurai.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2Fvagabond_vol1.jpg?alt=media",
+    "genero": "Samurais, Ação, Histórico, Drama, Seinen",
+    "link_acesso": "link_acesso_vol1_featured",
+    "titulo": "VAGABOND VOL.01",
+    "classificacao": "18",
+    "comentarios": "link_comentarios_vol1_featured",
+    "autor": "Takehiko Inoue",
+    "likes": "125"
+  },
+  {
+    "sinopse": "Continuação do volume 1 com a jornada inicial de Takezo Shinmen em sua busca para se tornar Miyamoto Musashi.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2Fvagabond_vol1b.jpg?alt=media",
+    "genero": "Samurais, Ação",
+    "link_acesso": "link_acesso_vol1b",
+    "titulo": "VAGABOND vol.1 (cópia 2)",
+    "classificacao": "18",
+    "comentarios": "link_comentarios_vol1b",
+    "autor": "Takehiko Inoue",
+    "likes": "88"
+  },
+  {
+    "sinopse": "Uma nova arte marcial aguarda Musashi, à medida que ele se aprofunda no Bushidô.",
+    "link_capa": "https://firebasestorage.googleapis.com/v0/b/zion-mega-store.appspot.com/o/r.s.poefo%2Flivros%2FCapas%2Fvagabond_vol1c.jpg?alt=media",
+    "genero": "Samurais, Ação",
+    "link_acesso": "link_acesso_vol1c",
+    "titulo": "VAGABOND vol.1 (cópia 3)",
+    "classificacao": "18",
+    "comentarios": "link_comentarios_vol1c",
+    "autor": "Takehiko Inoue",
+    "likes": "72"
+  }
+]
