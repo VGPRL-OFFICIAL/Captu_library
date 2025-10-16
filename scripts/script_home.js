@@ -1,8 +1,19 @@
 // URLs e Constantes
 // Caminhos atualizados para os novos arquivos JSON
-const ALL_BOOKS_URL = "../base_dados/livros.json";       // Contém a lista completa para o Grid
-const TOP_10_URL = "../base_dados/top_10.json";           // Contém apenas os itens do Top 10 (3 livros)
-const FEATURED_URL = "../base_dados/lancamentos.json";    // Contém apenas o item de destaque (1 livro)
+// Detecta caminho base dinamicamente para funcionar em diferentes estruturas
+function getBaseDadosPath(file) {
+    // Se estiver em /html, volta uma pasta, senão usa base_dados na raiz
+    if (window.location.pathname.includes('/html/')) {
+        return '../base_dados/' + file;
+    } else {
+        return 'base_dados/' + file;
+    }
+}
+
+const ALL_BOOKS_URL = getBaseDadosPath('livros.json');       // Contém a lista completa para o Grid
+const TOP_10_URL = getBaseDadosPath('top_10.json');           // Contém apenas os itens do Top 10 (3 livros)
+const FEATURED_URL = getBaseDadosPath('lancamentos.json');    // Contém apenas o item de destaque (1 livro)
+
 
 // Elementos DOM
 const top10ListElement = document.getElementById('top-10-list');
@@ -28,8 +39,9 @@ function renderBookItem(bookData, index) {
     else if (index % 3 === 2) filterStyle = 'filter: brightness(1.1);';
     
     // Caminho da imagem de fallback: use a imagem local se o link_capa falhar/estiver ausente
+    // Adiciona data-index para delegação de evento
     return `
-        <div class="book-item">
+        <div class="book-item" data-book='${encodeURIComponent(JSON.stringify(bookData))}' style="cursor:pointer;">
             <div class="book-cover" style="background-image: url('${coverUrl || '/images/vagabond_cover.jpg'}'); ${filterStyle}"></div>
             <div class="book-info">
                 <div class="book-title">${title}</div>
@@ -44,10 +56,9 @@ function renderSpecialBookItem(bookData) {
     let title = bookData.titulo || "Título Não Informado";
     let author = bookData.autor || "Autor Desconhecido";
     let likes = bookData.likes || '0';
-    
-    // Nota: O caminho da capa é local para manter o design especial
+    // Adiciona data-book para delegação de evento
     return `
-        <div class="book-item book-item-with-zero">
+        <div class="book-item book-item-with-zero" data-book='${encodeURIComponent(JSON.stringify(bookData))}' style="cursor:pointer;">
             <div class="book-cover jos-cover" style="background-image: url('images/jos_vagabumes.jpg');"></div>
             <div class="book-info">
                 <div class="book-author">${title}</div>
@@ -56,6 +67,37 @@ function renderSpecialBookItem(bookData) {
             </div>
         </div>
     `;
+// Delegação de evento para clique nos livros
+document.addEventListener('DOMContentLoaded', function() {
+    // ...carregamento dos livros já existe...
+    // Adiciona delegação de evento após renderização
+    function handleBookClick(e) {
+        let el = e.target;
+        while (el && el !== document.body) {
+            if (el.classList.contains('book-item') && el.hasAttribute('data-book')) {
+                try {
+                    const bookData = JSON.parse(decodeURIComponent(el.getAttribute('data-book')));
+                    localStorage.setItem('selectedBook', JSON.stringify(bookData));
+                    // Caminho dinâmico para funcionar em Live Server e local
+                    let livroPath = '';
+                    if (window.location.pathname.includes('/html/')) {
+                        livroPath = 'livro.html';
+                    } else if (window.location.pathname.endsWith('home.html')) {
+                        livroPath = 'livro.html';
+                    } else {
+                        livroPath = 'html/livro.html';
+                    }
+                    window.open(livroPath, '_blank');
+                } catch (err) {
+                    alert('Erro ao abrir detalhes do livro.');
+                }
+                break;
+            }
+            el = el.parentElement;
+        }
+    }
+    document.body.addEventListener('click', handleBookClick);
+});
 }
 
 // Renderiza o Card de Lançamento (Featured)
