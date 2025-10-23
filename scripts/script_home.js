@@ -2,12 +2,8 @@
 // Caminhos atualizados para os novos arquivos JSON
 // Detecta caminho base dinamicamente para funcionar em diferentes estruturas
 function getBaseDadosPath(file) {
-    // Se estiver em /html, volta uma pasta, senão usa base_dados na raiz
-    if (window.location.pathname.includes('/html/')) {
-        return '../base_dados/' + file;
-    } else {
-        return 'base_dados/' + file;
-    }
+    // Sempre retorna o caminho absoluto a partir da raiz do site
+    return '/base_dados/' + file;
 }
 
 const ALL_BOOKS_URL = getBaseDadosPath('livros.json');       // Contém a lista completa para o Grid
@@ -38,11 +34,10 @@ function renderBookItem(bookData, index) {
     else if (index % 3 === 1) filterStyle = 'filter: brightness(0.9);';
     else if (index % 3 === 2) filterStyle = 'filter: brightness(1.1);';
     
-    // Caminho da imagem de fallback: use a imagem local se o link_capa falhar/estiver ausente
-    // Adiciona data-index para delegação de evento
+   
     return `
         <div class="book-item" data-book='${encodeURIComponent(JSON.stringify(bookData))}' style="cursor:pointer;">
-            <div class="book-cover" style="background-image: url('${coverUrl || '/images/vagabond_cover.jpg'}'); ${filterStyle}"></div>
+            <div class="book-cover" style="background-image: url('${coverUrl || '../images/vagabond_cover.jpg'}'); ${filterStyle}"></div>
             <div class="book-info">
                 <div class="book-title">${title}</div>
                 <div class="book-author">${author}</div>
@@ -51,12 +46,12 @@ function renderBookItem(bookData, index) {
     `;
 }
 
-// Renderiza o item especial ('O Túmulo dos Vagalumes')
+
 function renderSpecialBookItem(bookData) {
     let title = bookData.titulo || "Título Não Informado";
     let author = bookData.autor || "Autor Desconhecido";
     let likes = bookData.likes || '0';
-    // Adiciona data-book para delegação de evento
+   
     return `
         <div class="book-item book-item-with-zero" data-book='${encodeURIComponent(JSON.stringify(bookData))}' style="cursor:pointer;">
             <div class="book-cover jos-cover" style="background-image: url('images/jos_vagabumes.jpg');"></div>
@@ -67,10 +62,9 @@ function renderSpecialBookItem(bookData) {
             </div>
         </div>
     `;
-// Delegação de evento para clique nos livros
+
 document.addEventListener('DOMContentLoaded', function() {
-    // ...carregamento dos livros já existe...
-    // Adiciona delegação de evento após renderização
+  
     function handleBookClick(e) {
         let el = e.target;
         while (el && el !== document.body) {
@@ -78,14 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const bookData = JSON.parse(decodeURIComponent(el.getAttribute('data-book')));
                     localStorage.setItem('selectedBook', JSON.stringify(bookData));
-                    // Caminho dinâmico para funcionar em Live Server e local
+                    
                     let livroPath = '';
                     if (window.location.pathname.includes('/html/')) {
                         livroPath = 'livro.html';
                     } else if (window.location.pathname.endsWith('home.html')) {
                         livroPath = 'livro.html';
                     } else {
-                        livroPath = 'html/livro.html';
+                        livroPath = 'livro.html';
                     }
                     window.open(livroPath, '_blank');
                 } catch (err) {

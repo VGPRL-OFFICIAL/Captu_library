@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poefo Library Clone</title>
+    <!-- Carrega o Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Usa o mesmo estilo da home para cores e layout -->
+    <link rel="stylesheet" href="../style/style_home.css">
+    <!-- Carrega Lucide Icons para os ícones -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Estilos customizados para cores específicas e rolagem */
+        :root {
+            --color-light-bg: #f5f5f5; /* Fundo claro da lista */
+            --color-draft-bg: #ffffff; /* Fundo dos rascunhos */
+            --color-card-shadow: rgba(0, 0, 0, 0.05);
+            --color-text-secondary: #6b7280; /* cinza escuro para detalhes */
+        }
+        body {
+            background-color: var(--color-light-bg);
+            font-family: 'Inter', sans-serif;
+        }
+        /* Esconde a barra de rolagem horizontal, mas mantém a funcionalidade */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Container Principal do Aplicativo (agora ocupa toda a largura/altura) -->
+    <div class="main-screen" style="min-height:100vh; background-color: #ffffff;">
+
+        <!-- 1. Top Bar (Barra Superior) -->
+        <div class="header-bar app-header">
+            <img src="../images/icon_logo.png" alt="Enviar" class="logo">
+            <span class="app-title">Poefo Library</span>
+            <div>
+                <img src="../images/send_ic.png" alt="Enviar" class="header-icon send-icon">
+                <img src="../images/notification_ic.png" alt="Notificações" class="header-icon notification-icon">
+            </div>
+        </div>
+
+        <!-- 2. Barra de Pesquisa -->
+        <div class="px-4 py-3">
+            <div class="relative">
+                <input
+                    type="text"
+                    placeholder="Pesquisar..."
+                    class="w-full py-2 pl-10 pr-4 text-sm bg-gray-100 text-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                >
+                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- 3. Principais Rascunhos (Main Drafts) -->
+        <section class="p-4 bg-gray-100">
+            <h2 class="text-base font-semibold text-gray-800 mb-3">Principais Rascunhos</h2>
+            
+            <!-- Carrossel de Cards com Scroll Horizontal -->
+            <div class="flex space-x-3 overflow-x-scroll pb-2 hide-scrollbar">
+                
+                <!-- Card Rascunho 1 -->
+                <div class="flex-shrink-0 w-32 h-20 bg-white rounded-xl shadow-md p-3 flex flex-col justify-center items-center text-center border border-gray-200">
+                    <span class="text-sm font-medium text-gray-500">campo vazio.</span>
+                </div>
+                
+                <!-- Card Rascunho 2 -->
+                <div class="flex-shrink-0 w-32 h-20 bg-white rounded-xl shadow-md p-3 flex flex-col justify-center items-center text-center border border-gray-200">
+                    <span class="text-sm font-medium text-gray-500">campo vazio.</span>
+                </div>
+                
+                <!-- Card Rascunho 3 (mais claro na imagem) -->
+                <div class="flex-shrink-0 w-32 h-20 bg-white rounded-xl shadow-md p-3 flex flex-col justify-center items-center text-center border border-gray-200">
+                    <span class="text-sm font-medium text-gray-500">campo vazio.</span>
+                </div>
+                
+                <!-- Adiciona mais um para visualização de rolagem -->
+                <div class="flex-shrink-0 w-32 h-20 bg-white rounded-xl shadow-md p-3 flex flex-col justify-center items-center text-center border border-gray-200">
+                    <span class="text-sm font-medium text-gray-500">campo vazio.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Todos os textos offline (Header da Lista) -->
+        <div class="flex justify-between items-center p-4">
+            <h2 class="text-base font-semibold text-gray-800">Todos os textos offline</h2>
+            <div class="flex space-x-2 text-gray-600">
+                <!-- Ícone de Compartilhar -->
+                <button class="p-1 rounded-full hover:bg-gray-100 transition">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                </button>
+                <!-- Ícone de Adicionar -->
+                <button class="p-1 rounded-full hover:bg-gray-100 transition">
+                    <i data-lucide="plus" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 5. Lista de Textos -->
+        <main class="divide-y divide-gray-100">
+            
+            <!-- Função para criar o ícone 'T' no círculo -->
+            <script>
+                // Mapeamento de cores baseado na imagem
+                const colorMap = [
+                    'bg-teal-100 text-teal-600', // Verde-Água (primeiro item)
+                    'bg-gray-200 text-gray-600', // Cinza (itens do meio)
+                    'bg-pink-100 text-pink-600', // Rosa (últimos itens)
+                ];
+
+                function createListItem(title, content, index) {
+                    const colorClasses = colorMap[index % colorMap.length];
+                    const lockIcon = index % 2 === 0 ? 'link' : 'lock'; // Alterna link/lock (baseado no ícone da imagem)
+
+                    return `
+                        <div class="flex items-start p-4 hover:bg-gray-50 transition cursor-pointer">
+                            <!-- Ícone T (Inicial/Placeholder) -->
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full ${colorClasses} flex items-center justify-center mr-3 mt-1">
+                                <span class="font-bold text-xl">T</span>
+                            </div>
+
+                            <!-- Título e Conteúdo -->
+                            <div class="flex-grow">
+                                <h3 class="text-sm font-semibold text-gray-800 leading-snug">${title}</h3>
+                                <p class="text-xs text-gray-500 mt-0.5 line-clamp-2">${content}</p>
+                            </div>
+
+                            <!-- Ícones de Ação -->
+                            <div class="flex-shrink-0 flex space-x-1.5 ml-2 mt-1 text-gray-400">
+                                <i data-lucide="${lockIcon}" class="w-4 h-4"></i>
+                                <i data-lucide="share-2" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const listItems = [
+                    { title: "minha biblioteca link", content: "o.minhabiblioteca.com.br/home/explore catálogo » https://app.minhabiblioteca.com.br/home/search/titles?q= pesquisa" },
+                    { title: "Relatório do evento", content: "foi completamente voltado para debates sobre a IA e teve como inspiração a atriz e cientista Hedy Lamarr, que juntament..." },
+                    { title: "Método de post", content: "833738463 (id da pasta) valor ( 727388484 838384873 838368447 737838484 ) ) // a pasta definida seus post poster" },
+                    { title: "Metodo de login", content: "login e senha" },
+                    { title: "Metodo de alocação de perfil", content: "uário e senha} key nome de usuário valor {Pedro Ludovico} key - foto de usuário valor {https://folder/perfis/imagem..." },
+                    { title: "metodo de conversão Bit decimal hexa e octal", content: "um método prático e fácil para fazer conversões entre binário, hexadecimal, octal e decimal. Entendendo as Bases Numé..." },
+                    { title: "Sombra da alma", content: "silente de um quarto vazio. Ecoa em paredes, um lamento frio. A cadeira desocupada, um livro esquecido. Testemunhas..." },
+                    { title: "Poefo Notas", content: "igado por instalar o app Poefo Notas! Sua confiança em nosso trabalho é fundamental e estamos comprometidos em for" },
+                    // Adicionando um item extra para garantir a repetição de cores e tamanho
+                    { title: "Outro Documento", content: "Este é um texto de preenchimento para simular mais um item na lista de rascunhos offline." },
+                ];
+
+                const mainElement = document.querySelector('main');
+                listItems.forEach((item, index) => {
+                    mainElement.innerHTML += createListItem(item.title, item.content, index);
+                });
+
+                // Inicializa os ícones Lucide
+                document.addEventListener('DOMContentLoaded', () => {
+                    lucide.createIcons();
+                });
+            </script>
+        </main>
+
+        <!-- Footer (Barra de Navegação Inferior) - Simples e Fixo -->
+        <div class="nav-bar">
+            <a href="#" class="nav-item">
+                <img src="../images/ic_game.png" alt="Game" class="nav-icon">
+                <span>Games</span>
+            </a>
+            <a href="#" class="nav-item">
+                <img src="../images/ic_edition.png" alt="Edition" class="nav-icon">
+                <span>Criar</span>
+            </a>
+            <a href="#" class="nav-item nav-item-active">
+                <img src="../images/ic_home.png" alt="Home" class="nav-icon nav-icon-active">
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item">
+                <img src="../images/ic_cloud_off_white.png" alt="Feed" class="nav-icon">
+                <span>Feed</span>
+            </a>
+            <a href="#" class="nav-item">
+                <img src="../images/user_ic.png" alt="Perfil" class="nav-icon">
+                <span>Conta</span>
+            </a>
+        </div>
+
+        <!-- Espaço para o nav-bar inferior não cobrir o conteúdo -->
+        <div style="height:70px;"></div>
+
+    </div>
+
+</body>
+</html>
